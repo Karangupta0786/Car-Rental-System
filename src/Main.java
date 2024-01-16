@@ -1,3 +1,6 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -225,7 +228,23 @@ class CarRentalSystem{
 }
 
 public class Main {
+    private static final String userName = "root";
+    private static final String password = "karan";
+    private static final String url = "jdbc:mysql://localhost:3306/?user=root";
+
     public static void main(String[] args) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+
+        try {
+            Connection connection = DriverManager.getConnection(url,userName,password);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
         CarRentalSystem rentalSystem = new CarRentalSystem();
         Car car1 = new Car("c1","Mahindra","Thar",1000);
         Car car2 = new Car("c2","Mahindra","Scorpio",1200);
